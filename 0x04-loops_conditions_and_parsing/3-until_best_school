@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 #Display Best School 10 times using until loop
 
-i=o
+i=0
+
 until [ $i -eq 10 ]
 do
-	echo "Best School"
-	((i++))
+  echo "Best School"
+  ((i++))
 done
