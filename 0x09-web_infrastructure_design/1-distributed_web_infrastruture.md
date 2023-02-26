@@ -1,8 +1,8 @@
 ## Distributed Web Infrastruture
 
-![Image of distributed web infrastructure](1-distributed_web_infrastructure)
+![Image of distributed web infrastructure](1-distributed_web_infrastructure.jpg)
 
-[Visit Board](1-distributed_web_infrastructure)
+[Visit Board](1-distributed_web_infrastructure.jpg)
 
 ## Description
 
