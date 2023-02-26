@@ -1,6 +1,7 @@
 ## Simple Web Stack
 ![Image of a simple web stack](0-simple_web_stack.jpg)
-[Visit board](https://lucid.app/lucidchart/cbacd0c4-e1df-4280-9dfa-f2cc3a6d4da7/edit?invitationId=inv_d591bc51-02af-4426-a863-616dd3738312&page=0_0#)
+
+[Visit board](0-simple_web_stack.jpg)
 
 ## Description
 
