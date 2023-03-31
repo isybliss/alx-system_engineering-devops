@@ -1,26 +1,11 @@
 #!/usr/bin/env bash
-#install ngix and have a file that returns the string "Hello World inside
+#configure nginx server that /redirect_me is redirecting to another page
 
-sudo apt-get update
-sudo apt-get install nginx -y
-echo "Hello World!" | sudo tee /var/www/html/index.html
-new_config=\
-"server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
-               root /var/www/html;
-        index index.html index.htm index.nginx-debian.html;
-        server_name _;
-	location / {
-                try_files \$uri \$uri/ =404;
-        }
+sudo apt-get -y update
+sudo apt-get install -y nginx
 
-        if (\$request_filename ~ redirect_me){
-            rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
-        }
-}
-"
+sudo echo "Hello World!" | sudo tee /var/www/html/index.html
+string_rep="server_name _;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com\/watch?v=QH2-TGU1wu4 permanent;"
+sudo sed -i "s/server_name _;/$string_rep/" /etc/nginx/sites-enabled/default
 
-echo "$new_config" > /etc/nginx/sites-available/default
-
-sudo service nginx start
+sudo service nginx restart
