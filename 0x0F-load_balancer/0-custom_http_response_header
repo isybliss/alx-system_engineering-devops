@@ -1,9 +1,32 @@
 #!/usr/bin/env bash
-#to configure a new server
+# Configure  web-02 to be identical to web-01
+# name of custom HTTP header: X-Served-By
+# value of custom HTTP header: Hostname of the server nginx is running on
 
 sudo apt-get update
 sudo apt-get -y install nginx
-sudo service nginx start
-sudo sed -i "11i\\\tadd_header X-Served-By $HOSTNAME;" /etc/nginx/nginx.conf
-echo "Hello World!" | sudo tee /usr/share/nginx/html/index.html
+
+# Firewall to allow request through port 80
+sudo ufw allow 'Nginx HTTP'
+sudo mkdir -p /var/www/html
+
+# Change permissions
+sudo chown -R 755 /var/www
+
+# index page
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# error page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+
+#redirect to a single point and add a hostname
+string_rep="server_name _;\n\tadd_header X-Served-By \$hostname;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent;"
+sudo sed -i "s/server_name _;/$string_rep/" /etc/nginx/sites-enabled/default
+
+# code to create an error page and redirect for 404
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+string_rep="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
+sudo sed -i "s/listen 80 default_server;/$string_rep/" /etc/nginx/sites-enabled/default
+
+# restart the server
 sudo service nginx restart
