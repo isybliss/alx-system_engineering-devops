@@ -46,7 +46,7 @@ frontend web-frontend
         bind *:80
 	mode http
 	bind *:443 ssl crt /etc/haproxy/certs/www.webisyclub.tech.pem
-	redirect scheme https if !{ ssl_fc }
+	stats uri /haproxy?stats
 	default_backend web-backend
 
 backend web-backend
