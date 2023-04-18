@@ -7,10 +7,9 @@ pkill apache2
 #replace port 80 with port 8080
 sed -i 's/80 default_server/8080 default_server/' /etc/nginx/sites-available/default
 #set user to nginx
-chown nginx:nginx /etc/nginx/nginx.conf
+sed -i "s/#user www-data/user nginx/" /etc/nginx/nginx.conf
 
 #permission to read and write to config file
-chmod 644 /etc/nginx/nginx.conf
+chmod 700 /etc/nginx/nginx.conf
 
-service nginx reload
-service nginx restart
+sudo -u service nginx restart
