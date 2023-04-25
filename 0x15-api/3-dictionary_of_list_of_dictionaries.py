@@ -20,9 +20,9 @@ if __name__ == '__main__':
         for task in todo:
             if task.get("userId") == userId:
                 userList.append({"username": username,
-                            "task": task.get("title"),
-                            "completed": task.get("completed")})
+                                "task": task.get("title"),
+                                "completed": task.get("completed")})
         mainDict[userId] = userList
-    
+
     with open('todo_all_employees.json', 'w') as filejson:
         json.dump(mainDict, filejson)
