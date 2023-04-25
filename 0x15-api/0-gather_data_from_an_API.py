@@ -14,7 +14,7 @@ if __name__ == '__main__':
         name = r.json().get('name')
 
         todos = requests.get('{}todos?userId={}'
-                .format(url, userId)).json()
+                             .format(url, userId)).json()
         totalTask = len(todos)
         completedTask = []
         for task in todos:
@@ -22,8 +22,8 @@ if __name__ == '__main__':
                 completedTask.append(task)
         count = len(completedTask)
 
-        print('Emloyee {} is done with tasks({}/{}):'
-                .format(name, count, totalTask))
+        print('Emloyee {} is done with tasks({}/{}'
+              .format(name, count, totalTask))
 
         for title in completedTask:
             print("\t {}".format(title.get("title")))
